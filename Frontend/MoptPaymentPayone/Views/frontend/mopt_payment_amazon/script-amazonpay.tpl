@@ -52,10 +52,15 @@
     }
 
     var accessToken = getURLParameter("access_token", location.hash)
+    console.log('dbg');
 
     if (typeof accessToken === 'string' && accessToken.match(/^Atza/)) {
         document.cookie = "amazon_Login_accessToken=" + accessToken +
             ";secure";
+        // var url = 'https://shop.testing.fatchip.local/sw562/moptAjaxPayone/ajaxStoreAmazonLoginAccesToken';
+        // var parameter = "amazon_Login_accessToken=" + accessToken + ";secure";
+        //ĸ
+        // $.ajax({ method: "POST", url: url, data: parameter });
     }
 
     window.onAmazonLoginReady = function () {

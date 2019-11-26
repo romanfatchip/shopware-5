@@ -54,6 +54,15 @@ class Shopware_Controllers_Frontend_MoptAjaxPayone extends Enlight_Controller_Ac
     }
 
     /**
+     *
+     */
+    public function ajaxStoreAmazonLoginAccesTokenAction()
+    {
+        $this->Front()->Plugins()->ViewRenderer()->setNoRender();
+        $test = '';
+    }
+
+    /**
      * Ask user wether to keep original submittted or corrected values
      */
     public function ajaxGetConsumerScoreUserAgreementAction()

@@ -274,6 +274,10 @@ class FrontendCheckout implements SubscriberInterface
                 $userData['billingaddress']['phone'] = 'notNeededByCountry';
             }
 
+            if (!$helper->isKlarnaBirthdayNeededByCountry() && is_null($userData['additional']['user']['birthday'])) {
+                $userData['additional']['user']['birthday'] = 'notNeededByCountry';
+            }
+
             if (!$helper->isKlarnaPersonalIdNeededByCountry() && !$userData['additional']['user']['mopt_payone_klarna_personalid']) {
                 $userData['additional']['user']['mopt_payone_klarna_personalid'] = 'notNeededByCountry';
             }
@@ -304,11 +308,7 @@ class FrontendCheckout implements SubscriberInterface
             $view->assign('billingAddressPhone', $userData['billingaddress']['phone']);
 
             // customer
-            if (is_null($userData['additional']['user']['birthday'])) {
-                $view->assign('customerDateOfBirth', '0000-00-00');
-            } else {
-                $view->assign('customerDateOfBirth', $userData['additional']['user']['birthday']);
-            }
+            $view->assign('customerDateOfBirth', $userData['additional']['user']['birthday']);
             $view->assign('customerGender', $helper->getKlarnaGender($userData));
             $view->assign('customerNationalIdentificationNumber', $userData['additional']['user']['mopt_payone_klarna_personalid']);
 

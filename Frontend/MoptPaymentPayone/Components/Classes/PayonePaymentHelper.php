@@ -1710,7 +1710,7 @@ class Mopt_PayonePaymentHelper
      *
      * @return bool
      */
-    private function isKlarnaBirthdayNeededByCountry()
+    public function isKlarnaBirthdayNeededByCountry()
     {
         $moptPayoneHelper = Shopware()->Container()->get('MoptPayoneMain')->getInstance()->getHelper();
         $userData = Shopware()->Modules()->Admin()->sGetUserData();

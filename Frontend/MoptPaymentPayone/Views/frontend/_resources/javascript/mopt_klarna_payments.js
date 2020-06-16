@@ -2,7 +2,6 @@
     'use strict';
 
     var pluginRegistered = false;
-    var widgetLoaded = false;
 
     reset();
 
@@ -22,12 +21,12 @@
             updatePlugin();
         } else {
             registerPlugin();
-            pluginRegistered = true;
         }
     }
 
     function registerPlugin() {
         StateManager.addPlugin('#shippingPaymentForm', 'payoneKlarnaPayments', null, null);
+        pluginRegistered = true;
     }
 
     function updatePlugin() {
@@ -174,8 +173,6 @@
                     $('#payment_meanmopt_payone_klarna').val(response['paymentId']);
 
                     me.loadKlarnaWidget(financingtype, response['client_token']).done(function () {
-                        widgetLoaded = true;
-
                         // re enable submit buttons
                         $(me.$el.get(0).elements).filter(':submit').each(function (_, element) {
                             element.disabled = false;

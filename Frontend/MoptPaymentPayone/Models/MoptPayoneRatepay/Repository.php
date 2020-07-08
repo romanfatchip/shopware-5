@@ -6,6 +6,7 @@
 
 namespace Shopware\CustomModels\MoptPayoneRatepay;
 
+use Doctrine\ORM\NonUniqueResultException;
 use Shopware\Components\Model\ModelRepository;
 
 /**
@@ -23,7 +24,13 @@ class Repository extends ModelRepository
             ->setParameter(1, $id);
 
         $hydrationMode = $asArray ? \Doctrine\ORM\AbstractQuery::HYDRATE_ARRAY : \Doctrine\ORM\AbstractQuery::HYDRATE_OBJECT;
-        $result        = $builder->getQuery()->getOneOrNullResult($hydrationMode);
+        $query = $builder->getQuery();
+        try {
+            $result = $query->getOneOrNullResult($hydrationMode);
+        } catch (NonUniqueResultException $e) {
+            $result = $query->getArrayResult()[0];
+        }
+
         return $result;
     }    
     
